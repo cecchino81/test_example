@@ -35,8 +35,8 @@ public class RestClient implements CommandLineRunner{
     }
 	
 	public static void main(String[] args) {
-//		getSaldo();
-//		effettuaBonifico();
+		getSaldo();
+		effettuaBonifico();
 		getTransazioni();
 	}
 	
