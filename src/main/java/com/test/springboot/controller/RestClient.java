@@ -31,7 +31,7 @@ public class RestClient implements CommandLineRunner{
 
     @Override
     public void run(String... args) throws Exception {
-        main(args);
+        main(args);  
     }
 	
 	public static void main(String[] args) {
@@ -48,14 +48,18 @@ public class RestClient implements CommandLineRunner{
 			param.put("accountId", new Long(14537780));
 			
 	        headers.setContentType(MediaType.APPLICATION_JSON);
-	        headers.set("Auth-Schema", AUT_SCHEMA);
+	        headers.set("Auth-Schemaff", AUT_SCHEMA);
 	        headers.set("Api-Key", API_KEY);
 
 	        HttpEntity<String> entity = new HttpEntity<String>(headers);
-	        ResponseEntity<Saldo> saldoResponse = restTemplate.exchange(GET_SALDO, HttpMethod.GET, entity, Saldo.class,param);
-
-	        log.info(restTemplate.toString());
-	        System.out.println(saldoResponse.toString());
+	        try {
+	        	ResponseEntity<Saldo> saldoResponse = restTemplate.exchange(GET_SALDO, HttpMethod.GET, entity, Saldo.class,param);
+	        	
+	        	log.info(restTemplate.toString());
+	  	        System.out.println(saldoResponse.toString());
+	        } catch (Exception exception) {
+		        exception.getMessage();
+	        }
 	}
 	
 	public static void effettuaBonifico () {
@@ -94,10 +98,14 @@ public class RestClient implements CommandLineRunner{
         headers.set("Auth-Schema", AUT_SCHEMA);
         headers.set("Api-Key", API_KEY);
 
-        HttpEntity<String> entity = new HttpEntity<String>(headers);
-        ResponseEntity<Saldo> transazioniResponse = restTemplate.exchange(GET_SALDO, HttpMethod.GET, entity, Saldo.class,param);
-
-        log.info(restTemplate.toString());
-        System.out.println(transazioniResponse.toString());
-}
+        try {
+	        HttpEntity<String> entity = new HttpEntity<String>(headers);
+	        ResponseEntity<Saldo> transazioniResponse = restTemplate.exchange(GET_SALDO, HttpMethod.GET, entity, Saldo.class,param);
+	        
+	        log.info(restTemplate.toString());
+	        System.out.println(transazioniResponse.toString());
+	    } catch (Exception exception) {
+	        exception.getMessage();
+	    }
+	}
 }
